@@ -21,7 +21,7 @@ async function getNewsByCategory(category_id) {
 export default async function Home() {
   const categories = await getcatgories();
   const news = await getNewsByCategory("04");
-  console.log("news", news);
+
   return (
     <div className="grid grid-cols-12 gap-5 mt-4">
       <div className="col-span-3">
