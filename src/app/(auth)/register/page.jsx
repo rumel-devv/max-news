@@ -5,28 +5,37 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
-  const { register, handleSubmit, formState:{ errors }} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleRegister = async (data) => {
-        const {name,email,photo,password} = data ;
-      const {data:res , error } = await authClient.signUp.email({
-    name: name,
-    email: email, 
-    password:password, 
-    image: photo,
-    callbackURL: "/",
-});
-console.log(name,email,password);
+    const { name, email, photo, password } = data;
+    const { data: res, error } = await authClient.signUp.email({
+      name: name,
+      email: email,
+      password: password,
+      image: photo,
+      callbackURL: "/",
+    });
+    console.log(name, email, password, photo);
+    if (error) {
+      alert(error.message);
+    }
+    if (res) {
+      alert("Signup Successfull");
+    }
   };
 
   return (
     <div className="w-9/12 mx-auto min-h-[80vh] flex items-center justify-center bg-gray-100  mt-4 rounded-md">
       <div className="bg-white p-12 mb-4 rounded-md ">
         <h2 className="text-xl font-semibold text-center">
-         Register your account
+          Register your account
         </h2>
         <form onSubmit={handleSubmit(handleRegister)}>
-
           <fieldset className="fieldset  rounded-box ">
             <label className="label text-md text-black">Name</label>
             <input
@@ -34,9 +43,11 @@ console.log(name,email,password);
               name="name"
               className="input"
               placeholder="Name"
-              {...register("name",{ required: "Name field is requeird" })}
+              {...register("name", { required: "Name field is requeird" })}
             />
-            {errors.name && (<p className="mt-2 text-red-500"> {errors.password.message} </p>)}
+            {errors.name && (
+              <p className="mt-2 text-red-500"> {errors.password.message} </p>
+            )}
           </fieldset>
 
           <fieldset className="fieldset  rounded-box ">
@@ -46,9 +57,13 @@ console.log(name,email,password);
               name="photo"
               className="input"
               placeholder="Photo url"
-              {...register("photo",{ required: "photo url field is requeird" })}
+              {...register("photo", {
+                required: "photo url field is requeird",
+              })}
             />
-            {errors.photo && (<p className="mt-2 text-red-500"> {errors.password.message} </p>)}
+            {errors.photo && (
+              <p className="mt-2 text-red-500"> {errors.password.message} </p>
+            )}
           </fieldset>
 
           <fieldset className="fieldset  rounded-box ">
@@ -58,9 +73,11 @@ console.log(name,email,password);
               name="email"
               className="input"
               placeholder="Email"
-              {...register("email",{ required: "email field is requeird" })}
+              {...register("email", { required: "email field is requeird" })}
             />
-            {errors.email && (<p className="mt-2 text-red-500"> {errors.password.message} </p>)}
+            {errors.email && (
+              <p className="mt-2 text-red-500"> {errors.password.message} </p>
+            )}
           </fieldset>
 
           <fieldset className="fieldset  rounded-box ">
@@ -70,9 +87,13 @@ console.log(name,email,password);
               name="password"
               className="input"
               placeholder="Password"
-              {...register("password",{ required: "password field is requeird" })}
+              {...register("password", {
+                required: "password field is requeird",
+              })}
             />
-            {errors.password && (<p className="mt-2 text-red-500"> {errors.password.message} </p>)}
+            {errors.password && (
+              <p className="mt-2 text-red-500"> {errors.password.message} </p>
+            )}
           </fieldset>
           <button className="btn w-full bg-black text-white mt-2">Login</button>
         </form>
