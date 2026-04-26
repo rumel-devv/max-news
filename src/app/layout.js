@@ -14,7 +14,7 @@ export const monserrat = Montserrat({
 })
 
 export const metadata = {
-  title: "MaxNews",
+  title: "Dragon News",
   description: "a digital place to know authentic news",
 };
 
