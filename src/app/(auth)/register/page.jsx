@@ -1,8 +1,9 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterPage = () => {
   const {
@@ -10,6 +11,8 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [isSHowPass, setisShowPass] = useState(false);
 
   const handleRegister = async (data) => {
     const { name, email, photo, password } = data;
@@ -80,10 +83,10 @@ const RegisterPage = () => {
             )}
           </fieldset>
 
-          <fieldset className="fieldset  rounded-box ">
+          <fieldset className="fieldset  rounded-box relative">
             <label className="label text-md text-black">Password</label>
             <input
-              type="password"
+              type={isSHowPass ? "text" : "password"}
               name="password"
               className="input"
               placeholder="Password"
@@ -91,6 +94,12 @@ const RegisterPage = () => {
                 required: "password field is requeird",
               })}
             />
+            <span
+              onClick={() => setisShowPass(!isSHowPass)}
+              className="text-lg  cursor-pointer absolute right-2 top-10 "
+            >
+              {isSHowPass ? <FaEye /> : <FaEyeSlash />}
+            </span>
             {errors.password && (
               <p className="mt-2 text-red-500"> {errors.password.message} </p>
             )}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 const SigninPage = () => {
   const {
@@ -12,7 +13,7 @@ const SigninPage = () => {
     formState: { errors },
   } = useForm();
 
-  const [isSHowPass,setisShowPass] = useState(false);
+  const [isSHowPass, setisShowPass] = useState(false);
 
   const handleLogin = async (data) => {
     const { data: res, error } = await authClient.signIn.email({
@@ -54,7 +55,12 @@ const SigninPage = () => {
                 required: "password field is requeird",
               })}
             />
-             <span onClick={()=> setisShowPass(!isSHowPass)} className="text-lg  cursor-pointer absolute right-2 top-10"><FaEye/></span>
+            <span
+              onClick={() => setisShowPass(!isSHowPass)}
+              className="text-lg  cursor-pointer absolute right-2 top-10"
+            >
+            { isSHowPass ? <FaEye/> : <FaEyeSlash/> }
+            </span>
             {errors.password && (
               <p className="mt-2 text-red-500"> {errors.password.message} </p>
             )}
