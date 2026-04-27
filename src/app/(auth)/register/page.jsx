@@ -23,7 +23,7 @@ const RegisterPage = () => {
       image: photo,
       callbackURL: "/",
     });
-    console.log(name, email, password, photo);
+
     if (error) {
       alert(error.message);
     }

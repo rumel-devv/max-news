@@ -14,7 +14,12 @@ const RightSidebar = () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
-    console.log('data',data);
+  };
+  const handleGithubLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "github",
+    });
+    console.log("data", data);
   };
 
   return (
@@ -27,7 +32,7 @@ const RightSidebar = () => {
         >
           <FaGoogle /> Login with google{" "}
         </button>
-        <button className="btn border-black ">
+        <button onClick={handleGithubLogin} className="btn border-black ">
           <FaGithub /> Login with Github{" "}
         </button>
       </div>
